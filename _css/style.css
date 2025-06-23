@@ -1,6 +1,6 @@
 :root {
     /*Colores principales */ 
-    --color-primary:#2563eb;
+    --color-primary:#6a25eb;
     --color-primary-dark:#1d4ed8;
     --color-secondary: #f59e8b;
     
@@ -12,7 +12,7 @@
     /*Colores de Fondo*/
     --color-bg:#ffffff;
     --color-bg-light:#f8fafc;
-    --color-bg-dark:#0f172a;
+    --color-bg-dark:#190f2a;
 
     /*Tipografia*/
     --font-primary: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -91,49 +91,58 @@ body{
  /* ==================================================
      Header y Navegación
     ================================================= */
+/* ===========================================
+   Header y Navegación
+   =========================================== */
 .header {
-    background-color: var(--color-bg);
+
+    background-color: var(--color-primary);
     border-bottom: 1px solid #e2e8fe;
     position: sticky;
     top: 0;
     z-index: 100;
+    color: var(--color-text-white);
 }
 
-.header_content {
+.header__content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
     padding: var(--space-sm) 0;
 }
 
-.logo__text{
+.logo__text {
     font-size: 1.5rem;
     font-weight: var(--font-weight-bold);
-    color: var(--color-primary);
+    color: var(--color-text-white);
 }
+
 
 .nav__list {
     display: flex;
     list-style: none;
-    gap: var(--space-md);
+    gap: 2rem;
 }
 
 .nav__link {
     text-decoration: none;
-    color: var(--color-text);
+    color: var(--color-text-white);
     font-weight: var(--font-weight-medium);
     transition: color 0.3s ease;
 }
 
 .nav__link:hover {
- color: var(--color-primary);
+    color: var(--color-primary);
 }
+
 
 /*Navegación responsive - en móvil ocultamos algunos elementos*/
 @media (max-width: 767px) { 
     .nav__list {
         gap: var(--space-sm);
-    
+        flex-direction: column; 
+        align-items: center; 
+
     }
 
     .nav__link {
@@ -144,10 +153,11 @@ body{
 /* Sección Hero*/
 
 .hero { 
- background: linear-gradient(135deg, var(--color-bg-light) 0% #e2e8f0 100%);
- padding: var(--space-2xl) 0;
- text-align: center;
+    background: linear-gradient(135deg, #d1d5db 0%, #e5e7eb 100%); 
+    padding: var(--space-2xl) 0;
+    text-align: center;
 }
+
 
 .hero_title {
     font-size: clamp(2rem, 6vw, 3.5rem);
@@ -226,44 +236,91 @@ body{
     }
 }
 
-/* ==================================================
-     Sección About
-====================================================*/
-.about_content{
+/* Contenedor de la sección "Sobre Mí" */
+.about {
+    background-color: #e9d8fd; 
+    padding: var(--space-2xl) 0;
+}
+.about__content {
     padding: var(--space-xl);
+    display: flex;
+    gap: var(--space-lg);
     align-items: center;
+    justify-content: space-between; 
+    flex-wrap: wrap;  
 }
 
+/* Estilo del texto */
 .about__text p {
     margin-bottom: var(--space-md);
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1.2rem;  
+    line-height: 1.8;  
 }
 
 .about__text p:last-child {
-    margin-bottom:0;
+    margin-bottom: 0;
 }
 
+/* Estilo del contenedor de la imagen */
 .placeholder-image {
     background-color: var(--color-bg-light);
     border: 2px dashed var(--color-secondary);
-    border-radius: 12px;
-    aspect-ratio: 1;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-text-light);
     font-weight: var(--font-weight-medium);
+    width: 250px;  
+    height: 300px;  
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
 }
 
-/*En tablets y desktop, usamos layout de dos columnas */
+.placeholder-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 @media (min-width: 768px) {
-    .about_content{
-        grid-template-columns: 2fr 1fr;
+    .about__text {
+        flex: 1;
+        max-width: 60%; 
     }
-    .placeholder-image{
-        max-width: 300px;
+    
+    .about__image {
+        flex: 1;
+    }
+    .about__content {
+        display: flex;
+        gap: var(--space-lg);
+        justify-content: flex-start; 
+    }
+
+    .placeholder-image {
+        max-width: 350px; 
         justify-self: center;
+    }
+}
+
+@media (max-width: 767px) {
+    .about__content {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-lg);
+    }
+
+    .placeholder-image {
+        width: 80%;  
+        max-width: 400px; 
+        height: auto;
+    }
+
+    .about__text {
+        font-size: 1.1rem;  
+        max-width: 100%;
     }
 }
 
@@ -271,9 +328,10 @@ body{
    Sección Skills con Grid Responsive 
    ======================================================= */
    .skills{
-    background-color: var(--color-bg-light);
+    background-color: #d7dae0;
     padding: var(--space-2xl) 0;
    }
+
 
    .skills__grid {
     display: grid;
@@ -294,13 +352,15 @@ body{
     }
 }
 
-.skills-card{
-    background-color: var(--color-bg);
+.skills-card {
+    background-color: var(--color-bg-light);
     border-radius: 12px;
     padding: var(--space-lg);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
 }
+
 
 .skills-card:hover{
     transform: translateY(-4px);
@@ -325,16 +385,16 @@ body{
 .footer {
     background-color: var(--color-bg-dark);
     color: var(--color-text-white);
-    padding: var(--space-xl) 0; /* Reduce el padding a solo arriba y abajo */
+    padding: var(--space-xl) 0;
     text-align: center;
-    min-height: 200px; /* Establece una altura mínima para el footer */
+    min-height: 200px; 
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .footer__title {
-    font-size: clamp(1.75rem, 4vw, 2.25rem); /* Ajusta el tamaño del título */
+    font-size: clamp(1.75rem, 4vw, 2.25rem); 
     font-weight: var(--font-weight-bold);
     margin-bottom: var(--space-sm);
 }
@@ -353,32 +413,39 @@ body{
     gap: var(--space-lg);
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: var(--space-lg); 
 }
 
 .contact-link {
-    color: var(--color-text-white);
+    background-color: var(--color-primary); 
+    color: var(--color-text-white); 
     text-decoration: none;
     font-weight: var(--font-weight-medium);
-    padding: var(--space-sm) var(--space-md);
-    border: 1px solid #374151;
+    padding: var(--space-sm) var(--space-lg);
     border-radius: 8px;
+    border: 2px solid transparent; 
     transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    min-width: 200px;
 }
 
 .contact-link:hover {
-    border-color: var(--color-primary);
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark); 
+    transform: translateY(-2px); 
 }
 
-/* En móvil, los enlaces de contacto se apilan verticalmente */
-@media (max-width: 640px) {
-    .footer__contact {
-        flex-direction: column;
-        align-items: center;
-    }
+.contact-link:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4); 
+}
 
+/* En móvil, el botón ocupa todo el ancho disponible */
+@media (max-width: 640px) {
     .contact-link {
         width: 100%;
-        max-width: 250px;
+        max-width: 280px; 
     }
 }
